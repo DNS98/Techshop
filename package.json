@@ -5,12 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node backend/index.js"
+    "frontend": "npm run start --prefix frontend",
+    "server": "node backend/index.js",
+    "app": "concurrently npm \"npm run server\" \"npm run frontend\""
   },
   "author": "Dennis Niculita",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^8.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^7.0.5"

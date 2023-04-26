@@ -49,7 +49,7 @@ function ProdusCard({ produs }) {
       shadow="lg"
       position="relative"
     >
-      {produs.isNew && <Circle size="10px" position="absolute" top={2} right={2} bg="green.300" />}
+      {produs.produsIsNew && <Circle size="10px" position="absolute" top={2} right={2} bg="green.300" />}
       {produs.stoc <= 0 && <Circle size="10px" position="absolute" top={2} right={2} bg="red.300" />}
       <Image src={produs.image} alt={produs.nume} roundedTop="lg" />
 
@@ -59,7 +59,7 @@ function ProdusCard({ produs }) {
             Nu este in stoc
           </Badge>
         )}
-        {produs.isNew && (
+        {produs.produsIsNew && (
           <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="green">
             Nou
           </Badge>
