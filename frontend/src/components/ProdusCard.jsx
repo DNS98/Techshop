@@ -12,14 +12,17 @@ import {
   Link,
   HStack,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import { FiShoppingCart } from 'react-icons/fi';
 import { Link as ReactLink } from 'react-router-dom';
 import { StarIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCosItem } from '../redux/actiuni/cosActiuni';
 
 const Rating = ({ rating, numReviews }) => {
-  const { iconSize, setIconSize } = useState('14px');
+  const { iconSize } = useState('14px');
   return (
     <Flex>
       <HStack spacing="2px">
@@ -36,7 +39,26 @@ const Rating = ({ rating, numReviews }) => {
   );
 };
 
-function ProdusCard({ produs }) {
+const ProdusCard = ({ produs }) => {
+  const dispatch = useDispatch();
+  const toast = useToast();
+
+  const cosInfo = useSelector((state) => state.cos);
+  const { cos } = cosInfo;
+
+  const addItem = (id) => {
+    if (cos.some((cosItem) => cosItem.id === id)) {
+      toast({
+        description: 'Acest produs este deja in cos.',
+        status: 'error',
+        isClosable: true,
+      });
+    } else {
+      dispatch(addCosItem(id, 1));
+      toast({ description: 'Produsul a fost adaugat', status: 'success', isClosable: true });
+    }
+  };
+
   return (
     <Stack
       p="2px"
@@ -84,13 +106,13 @@ function ProdusCard({ produs }) {
           {produs.pret.toFixed(2)}
         </Box>
         <Tooltip label="Adauga cos" bg="white" placement="bottom" color="gray.800" fontSize="1em">
-          <Button variant="ghost" display="flex" disabled={produs.stoc <= 0}>
+          <Button variant="ghost" display="flex" disabled={produs.stoc <= 0} onClick={() => addItem(produs._id)}>
             <Icon as={FiShoppingCart} h={7} w={7} alignSelf="center" />
           </Button>
         </Tooltip>
       </Flex>
     </Stack>
   );
-}
+};
 
 export default ProdusCard;
