@@ -4,7 +4,7 @@ export const initialState = {
     loading: false,
     error: null,
     produse: [],
-
+    produs: null,
 }
 
 export const produseSlice = createSlice({
@@ -19,14 +19,19 @@ export const produseSlice = createSlice({
             state.error = null;
             state.produse = payload
         },
-       setError: (state, {payload}) => {
+        setProdus: (state, {payload}) => {
+            state.produs = payload;
+            state.loading = false;
+            state.error = null;
+        },
+        setError: (state, {payload}) => {
         state.error = payload;
         state.loading = false;
        },
     },
 });
 
-export const {setLoading, setError, setProduse} = produseSlice.actions;
+export const {setLoading, setError, setProduse, setProdus} = produseSlice.actions;
 export default produseSlice.reducer;
 
-export const produseSetlector = (state) => state.produse;
+export const produseSelector = (state) => state.produse;

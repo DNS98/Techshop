@@ -78,7 +78,7 @@ const ProdusCard = ({ produs }) => {
       <Box flex="1" maxH="5" alignItems="baseline">
         {produs.stoc <= 0 && (
           <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-            Nu este in stoc
+            Stoc Epuizat
           </Badge>
         )}
         {produs.produsIsNew && (
@@ -89,7 +89,7 @@ const ProdusCard = ({ produs }) => {
       </Box>
 
       <Flex mt="1" justifyContent="space-between" alignContent="center">
-        <Link as={ReactLink} to={`/produs${produs._id}`} pt="2" cursor="pointer">
+        <Link as={ReactLink} to={`/produs/${produs._id}`} pt="2" cursor="pointer">
           <Box fontSize="2xl" fontWeight="semibold" lineHeight="tight">
             {produs.nume}
           </Box>

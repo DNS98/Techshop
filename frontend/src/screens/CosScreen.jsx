@@ -34,7 +34,7 @@ const getHeadingContent = () => (cos.length === 1 ? '( 1 Item)' : `(${cos.length
         </Stack>
       ) : error ? (
         <Alert status="error">
-          <AlertIcon />
+          <AlertIcon/>
           <AlertTitle>Ne pare rau!</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>

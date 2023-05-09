@@ -59,4 +59,4 @@ export const cosSlice = createSlice({
 export const {setLoading, setError, cosItemAdd, cosItemRemoval} = cosSlice.actions;
 export default cosSlice.reducer;
 
-export const cosSetlector = (state) => state.cos;
+export const cosSelector = (state) => state.cos;
