@@ -15,6 +15,7 @@ import {
 import { Link as ReactLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { GiLaptop } from 'react-icons/gi';
+import { useState } from 'react';
 
 const links = [
   { linkName: 'Produse', path: '/produse' },
@@ -37,6 +38,7 @@ const NavLink = ({ path, children }) => (
 const Navbar = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const [isHovering, setIsHovering] = useState(false);
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
@@ -48,9 +50,15 @@ const Navbar = () => {
         />
 
         <HStack>
-          <Link as={ReactLink} to="/">
+          <Link
+            as={ReactLink}
+            to="/"
+            style={{ textDecoration: 'none' }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
             <Flex alignItems="center">
-              <Icon as={GiLaptop} h={6} w={6} color="orange.400" mr="7px" />
+              <Icon as={GiLaptop} h={8} w={8} color={isHovering ? 'red.800' : 'orange.400'} mr="7px" />
               <Text fontWeight="extrabold">Tech Shop</Text>
             </Flex>
           </Link>

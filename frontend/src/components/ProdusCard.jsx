@@ -106,7 +106,7 @@ const ProdusCard = ({ produs }) => {
           {produs.pret.toFixed(2)}
         </Box>
         <Tooltip label="Adauga cos" bg="white" placement="bottom" color="gray.800" fontSize="1em">
-          <Button variant="ghost" display="flex" disabled={produs.stoc <= 0} onClick={() => addItem(produs._id)}>
+          <Button variant="ghost" display="flex" isDisabled={produs.stoc <= 0} onClick={() => addItem(produs._id)}>
             <Icon as={FiShoppingCart} h={7} w={7} alignSelf="center" />
           </Button>
         </Tooltip>
