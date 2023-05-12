@@ -42,8 +42,8 @@ import {
                 Product
               </Text>
               <Stack spacing="3" shouldWrapChildren>
-                <Button variant="link">How it works</Button>
-                <Button variant="link">Pricing</Button>
+                <Button variant="link">Cum functioneaza</Button>
+                <Button variant="link">Preturi</Button>
               </Stack>
             </Stack>
             <Stack spacing="4" minW="36" flex="1">
@@ -51,15 +51,15 @@ import {
                 Legal
               </Text>
               <Stack spacing="3" shouldWrapChildren>
-                <Button variant="link">Privacy</Button>
-                <Button variant="link">Terms</Button>
-                <Button variant="link">License</Button>
+                <Button variant="link">Suport tehnic</Button>
+                <Button variant="link">Politica de returnare</Button>
+                <Button variant="link">Licenta</Button>
               </Stack>
             </Stack>
           </Stack>
           <Stack spacing="4">
             <Text fontSize="sm" fontWeight="semibold" color="subtle">
-              Stay up to date
+              News Letter
             </Text>
             <Stack spacing="4" direction={{ base: 'column', sm: 'row' }} maxW={{ lg: '360px' }}>
               <Input placeholder="Enter your email" type="email" required />

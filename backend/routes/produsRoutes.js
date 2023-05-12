@@ -1,5 +1,6 @@
 import express from 'express'
 import Produs from '../models/Produs.js';
+
 const produsRoutes = express.Router();
 
 

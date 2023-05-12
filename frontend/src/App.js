@@ -6,7 +6,8 @@ import CosScreen from './screens/CosScreen';
 import ProdusScreen from './screens/ProdusScreen';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
-
+import LoginScreen from './screens/LoginScreen';
+import InregistrareScreen from './screens/InregistrareScreen';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             <Route path='/produse' element={ <ProduseScreen /> }/>
             <Route path='/produs/:id' element={ <ProdusScreen /> }/>
             <Route path='/cos' element={ <CosScreen /> }/>
+            <Route path='/login' element={ <LoginScreen /> }/>
+            <Route path='/inregistrare' element={ <InregistrareScreen /> }/>
           </Routes>
         </main>
 
