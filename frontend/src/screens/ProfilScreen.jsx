@@ -34,8 +34,9 @@ const ProfilScreen = () => {
   const toast = useToast();
 
   useEffect(() => {
-    if(updateSuccess) {
-        toast({description: 'Profil actualizat.', status: 'success', isClosable: true})
+    if (updateSuccess) {
+      toast({ description: 'Profil actualizat.', status: 'success', isClosable: true });
+      dispatch(resetUpdateSuccess());
     }
   }, [toast, updateSuccess]);
 
@@ -54,8 +55,7 @@ const ProfilScreen = () => {
           .oneOf([Yup.ref('password'), null], 'Parolele trebuie sa corespunda'),
       })}
       onSubmit={(values) => {
-        dispatch(resetUpdateSuccess());
-        dispatch(updateProfil(userInfo._id, values.name, values.email, values.password))
+        dispatch(updateProfil(userInfo._id, values.name, values.email, values.password));
       }}
     >
       {(formik) => (
@@ -66,7 +66,7 @@ const ProfilScreen = () => {
           px={{ base: '4', md: '8', lg: '12' }}
           py={{ base: '6', md: '8', lg: '12' }}
         >
-          <Stack spacing='10' direction={{ base: 'column', lg: 'row' }} align={{ lg: 'flex-start' }}>
+          <Stack spacing="10" direction={{ base: 'column', lg: 'row' }} align={{ lg: 'flex-start' }}>
             <Stack flex="1.5" mb={{ base: '2xl', md: 'none' }}>
               <Heading fontSize="2xl" fontWeight="extrabold">
                 Profil
@@ -99,27 +99,27 @@ const ProfilScreen = () => {
                       />
                     </FormControl>
                   </Stack>
-                  <Stack spacing='6'>
-                    <Button colorScheme='orange' size='lg' fontSize='md' isLoading={loading} type='submit'>
-                        Salvare
+                  <Stack spacing="6">
+                    <Button colorScheme="orange" size="lg" fontSize="md" isLoading={loading} type="submit">
+                      Salvare
                     </Button>
                   </Stack>
                 </Stack>
               </Stack>
             </Stack>
-            <Flex direction='column' align='center' flex='1' _dark={{bg: 'grey.900'}}>
-                <Card>
-                    <CardHeader>
-                        <Heading size='md'>Raport User</Heading>
-                    </CardHeader>
-                    <CardBody>
-                        <Stack divider={<StackDivider/>} spacing='4'>
-                            <Box pt='2' fontSize='sm'>
-                                Inregistrat in data de: {new Date(userInfo.createdAt).toDateString()}
-                            </Box>
-                        </Stack>
-                    </CardBody>
-                </Card>
+            <Flex direction="column" align="center" flex="1" _dark={{ bg: 'grey.900' }}>
+              <Card>
+                <CardHeader>
+                  <Heading size="md">Raport User</Heading>
+                </CardHeader>
+                <CardBody>
+                  <Stack divider={<StackDivider />} spacing="4">
+                    <Box pt="2" fontSize="sm">
+                      Inregistrat in data de: {new Date(userInfo.createdAt).toDateString()}
+                    </Box>
+                  </Stack>
+                </CardBody>
+              </Card>
             </Flex>
           </Stack>
         </Box>
