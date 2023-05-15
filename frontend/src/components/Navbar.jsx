@@ -26,10 +26,27 @@ import { GiLaptop } from 'react-icons/gi';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/actiuni/userActiuni';
+import { FiShoppingCart } from 'react-icons/fi';
+
+const CosIcon = () => {
+  const cosInfo = useSelector((state) => state.cos)
+  const {cos} = cosInfo;
+  return (
+    <Flex>
+      <Text as='sub' fontSize='xs'>
+        {cos.length}
+        </Text>
+        <Icon ml='-1.5' as={FiShoppingCart} h='4' w='7' alignSelf='center'></Icon>
+      Cos
+    </Flex>
+  )
+ }
+
+
 
 const links = [
   { linkName: 'Produse', path: '/produse' },
-  { linkName: 'Cos', path: '/cos' },
+  { linkName: <CosIcon/>, path: '/cos' },
 ];
 
 const NavLink = ({ path, children }) => (

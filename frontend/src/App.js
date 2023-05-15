@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import InregistrareScreen from './screens/InregistrareScreen';
+import ProfilScreen from './screens/ProfilScreen';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/cos' element={ <CosScreen /> }/>
             <Route path='/login' element={ <LoginScreen /> }/>
             <Route path='/inregistrare' element={ <InregistrareScreen /> }/>
+            <Route path='/profil' element={ <ProfilScreen /> }/>
           </Routes>
         </main>
 
