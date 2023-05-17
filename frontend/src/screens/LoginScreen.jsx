@@ -1,13 +1,11 @@
 import {
   Button,
-  Checkbox,
   Container,
   FormControl,
   Heading,
   HStack,
   Text,
   useBreakpointValue,
-  useColorModeValue,
   Alert,
   AlertIcon,
   AlertTitle,
@@ -16,7 +14,7 @@ import {
   Stack,
   Box,
 } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';

@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import TextField from '../components/TextField';
 import PasswordTextField from '../components/PasswordTextField';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,7 +42,7 @@ const InregistrareScreen = () => {
 
   return (
     <Formik
-      initialValues={{ email: '', password: '', name: '' }}
+      initialValues={{ email: '', password: '', name: '', confirmPassword: '' }}
       validationSchema={Yup.object({
         name: Yup.string().required('Numele este obligatoriu'),
         email: Yup.string().email('Email gresit').required('Necesita adresa de email.'),

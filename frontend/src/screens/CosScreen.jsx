@@ -61,7 +61,7 @@ const getHeadingContent = () => (cos.length === 1 ? '( 1 Item)' : `(${cos.length
             spacing={{ base: '8', md: '16' }}>
                 <Stack spacing={{base: '8', md: '10'}} flex='2'>
                     <Heading fontSize='2xl' fontWeight='extrabold'>
-                        Cos cumparaturi {getHeadingContent}
+                        Cos cumparaturi {getHeadingContent()}
                     </Heading>
                     <Stack spacing='6'>
                        {cos.map((cosItem) => 

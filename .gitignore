@@ -9,7 +9,7 @@ node_modules/
 
 # testing
 /coverage
-
+/frontend/src/client_id.js
 # production
 /build
 

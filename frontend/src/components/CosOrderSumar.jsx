@@ -6,10 +6,10 @@ import { Link as ReactLink, useNavigate } from 'react-router-dom';
 
 const CosOrderSumar = () => {
   const [buttonLoading, setButtonLoading] = useState();
-  const livrareStandard = Number(4.99).toFixed(2);
+  const standardshipping = Number(4.99).toFixed(2);
   const cosItem = useSelector((state) => state.cos);
   const { subtotal } = cosItem;
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const checkoutHandler = () => {
     setButtonLoading(true);
@@ -32,7 +32,7 @@ const CosOrderSumar = () => {
           </Text>
           <Text fontWeight="medium">
             {subtotal <= 1000 ? (
-              livrareStandard
+              standardshipping
             ) : (
               <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="green">
                 Gratis
@@ -45,7 +45,7 @@ const CosOrderSumar = () => {
             Total
           </Text>
           <Text fontSize="xl" fontWeight="extrabold">
-           ${subtotal <= 1000 ? Number(subtotal) + Number(livrareStandard) : subtotal}
+           ${subtotal <= 1000 ? Number(subtotal) + Number(standardshipping) : subtotal}
           </Text>
           
         </Flex>
