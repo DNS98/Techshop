@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { setLoading, setError, userLogin, userLogout, updateUserProfil, resetUpdate } from '../slices/user';
+import { setLoading, setError, userLogin, userLogout, updateUserProfil, resetUpdate, setUserOrders } from '../slices/user';
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -91,4 +91,32 @@ export const updateProfil = (id, nume, email, password) => async (dispatch, getS
 
 export const resetUpdateSuccess = () => async(dispatch) => {
     dispatch(resetUpdate());
+}
+
+export const getUserOrders = () => async(dispatch, getState) => {
+    dispatch(setLoading(true))
+    const {
+        user: {userInfo}, 
+    } = getState();
+
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+                'Content-Type': 'application/json', 
+            },
+        };
+        const {data} = await axios.get(`/api/users/${userInfo._id}`, config)
+        dispatch(setUserOrders(data));
+    } catch (error) {
+        dispatch(
+            setError(
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message 
+                ? error.message 
+                : "Eroare neasteptata incearca mai tarziu."
+            )
+        );
+    }
 }

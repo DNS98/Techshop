@@ -126,7 +126,7 @@ const Navbar = () => {
                     <CgProfile />
                     <Text ml="2">Profil</Text>
                   </MenuItem>
-                  <MenuItem as={ReactLink} to="/comenzi">
+                  <MenuItem as={ReactLink} to="/comenzile-tale">
                     <MdLocalShipping/>
                     <Text ml="2">Comenzile tale</Text>
                   </MenuItem>

@@ -46,7 +46,7 @@ const PaymentSuccessModal = ({ isOpen, onClose }) => {
                   Plata reusita!
                 </AlertTitle>
                 <Stack mt='20px' minW='200px'>
-                    <Button colorScheme='teal' variant='outline' as={ReactLink} to='/orderul-tau'>
+                    <Button colorScheme='teal' variant='outline' as={ReactLink} to='/comenzile-tale'>
                         Comanda Dv.
                     </Button>
                     <Button colorScheme='teal' variant='outline' as={ReactLink} to='/produse'>

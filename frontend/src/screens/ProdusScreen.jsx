@@ -17,29 +17,44 @@ import {
   SimpleGrid,
   useToast,
   Wrap,
+  Tooltip,
+  Textarea,
+  Input
 } from '@chakra-ui/react';
 import { MinusIcon, StarIcon, SmallAddIcon } from '@chakra-ui/icons';
 import { BiPackage, BiCheckShield, BiSupport } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProdus } from '../redux/actiuni/produsActiuni';
+import { createProdusReview, getProdus, resetProdusError } from '../redux/actiuni/produsActiuni';
 import { addCosItem } from '../redux/actiuni/cosActiuni';
 import { useEffect, useState } from 'react';
 
 const ProdusScreen = () => {
+  const [comentariu, setComentariu] = useState('');
+  const [rating, setRating] = useState(1);
+  const [titlu, setTitlu] = useState('');
+  const [reviewBoxOpen, setReviewBoxOpen] = useState(false);
   const [amount, setAmount] = useState(1);
   let { id } = useParams();
   const toast = useToast();
   //redux
   const dispatch = useDispatch();
   const produse = useSelector((state) => state.produse);
-  const { loading, error, produs } = produse;
+  const { loading, error, produs, reviewSend } = produse;
 
   const cosContent = useSelector((state) => state.cos);
   const { cos } = cosContent;
 
+  const user = useSelector((state) => state.user);
+  const { userInfo } = user;
+
   useEffect(() => {
     dispatch(getProdus(id));
-  }, [dispatch, id, cos]);
+    if (reviewSend) {
+      toast({ description: 'Review produs salvat.', status: 'success', isClosable: true });
+      dispatch(resetProdusError());
+      setReviewBoxOpen(false);
+    }
+  }, [dispatch, toast, id, cos, reviewSend]);
 
   const changeAmount = (input) => {
     if (input === 'plus') {
@@ -48,6 +63,12 @@ const ProdusScreen = () => {
     if (input === 'minus') {
       setAmount(amount - 1);
     }
+  };
+
+  const hasUserReviewed = () => produs.reviews.some((item) => item.user === userInfo._id);
+
+  const onSubmit = () => {
+    dispatch(createProdusReview(produs._id, userInfo._id, comentariu, rating, titlu));
   };
 
   const addItem = () => {
@@ -153,6 +174,54 @@ const ProdusScreen = () => {
                 <Image mb="30px" src={produs.image} alt={produs.nume} />
               </Flex>
             </Stack>
+            {userInfo && (
+              <>
+                <Tooltip label={hasUserReviewed() ? 'Ati scris un review despre acest produs deja.' : ''} fontSize="md">
+                  <Button
+                    isDisabled={hasUserReviewed()}
+                    my="20px"
+                    w="140px"
+                    colorScheme="orange"
+                    onClick={() => setReviewBoxOpen(!reviewBoxOpen)}
+                  >
+                    Scrie un Review
+                  </Button>
+                </Tooltip>
+                {reviewBoxOpen && (
+                  <Stack mb='20px'>
+                    <Wrap>
+                      <HStack spacing='2px' >
+                        <Button variant='outline' onClick={() => setRating(1)}>
+                          <StarIcon color='orange.500'/>
+                        </Button>
+                        <Button variant='outline' onClick={() => setRating(2)}>
+                          <StarIcon color={rating >= 2 ? 'orange.500' : 'gray.200'}/>
+                        </Button>
+                        <Button variant='outline' onClick={() => setRating(3)}>
+                          <StarIcon color={rating >= 3 ? 'orange.500' : 'gray.200'}/>
+                        </Button>
+                        <Button variant='outline' onClick={() => setRating(4)}>
+                          <StarIcon color={rating >= 4 ? 'orange.500' : 'gray.200'}/>
+                        </Button>
+                        <Button variant='outline' onClick={() => setRating(5)}>
+                          <StarIcon color={rating >= 5 ? 'orange.500' : 'gray.200'}/>
+                        </Button>
+                      </HStack>
+                    </Wrap>
+                    <Input onChange={(e) => {
+                      setTitlu(e.target.value)
+                    }}
+                    palcepolder='Review titlu (optional)'/>
+                    <Textarea
+                      onChange={(e) => {
+                        setComentariu(e.target.value)
+                      }}
+                      palcepolder={`Produsul ${produs.nume} este...`}/>
+                      <Button w='140px' colorScheme='orange' onClick={() => onSubmit()}>Publica Review</Button>
+                  </Stack>
+                )}
+              </>
+            )}
             <Stack>
               <Text fontSize="xl" fontWeight="bold">
                 Reviews
@@ -170,7 +239,7 @@ const ProdusScreen = () => {
                         {review.titlu && review.titlu}
                       </Text>
                     </Flex>
-                    <Box py="12px">{review.comment}</Box>
+                    <Box py="12px">{review.comentariu}</Box>
                     <Text fontSize="sm" color="gray.400">
                       de {review.nume}, {new Date(review.createdAt).toDateString()}
                     </Text>
@@ -178,7 +247,6 @@ const ProdusScreen = () => {
                 ))}
               </SimpleGrid>
             </Stack>
-
           </Box>
         )
       )}
