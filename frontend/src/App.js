@@ -11,6 +11,7 @@ import InregistrareScreen from './screens/InregistrareScreen';
 import ProfilScreen from './screens/ProfilScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import UserOrderScreen from './screens/UserOrderScreen';
+import AdminPanelScreen from './screens/AdminPanelScreen';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/profil" element={<ProfilScreen />} />
             <Route path="/checkout" element={<CheckoutScreen />} />
             <Route path="/comenzile-tale" element={<UserOrderScreen />} />
+            <Route path="/admin-panel" element={<AdminPanelScreen />} />
           </Routes>
         </main>
 

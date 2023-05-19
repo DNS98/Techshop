@@ -25,4 +25,13 @@ const securitateRoute = asyncHandler(async(req, res, next) => {
     }
 })
 
-export default securitateRoute;
+const admin = (req, res, next) => {
+    if(req.user && req.user.isAdmin !== 'false') {
+        next();
+    } else {
+        res.status(401)
+        throw new Error('Neautorizat ca si admin ')
+    }
+};
+
+export { securitateRoute, admin };

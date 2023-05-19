@@ -20,8 +20,8 @@ import {
 } from '@chakra-ui/react';
 import { Link as ReactLink } from 'react-router-dom';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import {CgProfile} from 'react-icons/cg'
-import {MdLocalShipping, MdLogout} from 'react-icons/md'
+import { CgProfile } from 'react-icons/cg';
+import { MdLocalShipping, MdLogout, MdOutlineAdminPanelSettings } from 'react-icons/md';
 import { GiLaptop } from 'react-icons/gi';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,24 +29,22 @@ import { logout } from '../redux/actiuni/userActiuni';
 import { FiShoppingCart } from 'react-icons/fi';
 
 const CosIcon = () => {
-  const cosInfo = useSelector((state) => state.cos)
-  const {cos} = cosInfo;
+  const cosInfo = useSelector((state) => state.cos);
+  const { cos } = cosInfo;
   return (
     <Flex>
-      <Text as='sub' fontSize='xs'>
+      <Text as="sub" fontSize="xs">
         {cos.length}
-        </Text>
-        <Icon ml='-1.5' as={FiShoppingCart} h='4' w='7' alignSelf='center'></Icon>
+      </Text>
+      <Icon ml="-1.5" as={FiShoppingCart} h="4" w="7" alignSelf="center"></Icon>
       Cos
     </Flex>
-  )
- }
-
-
+  );
+};
 
 const links = [
   { linkName: 'Produse', path: '/produse' },
-  { linkName: <CosIcon/>, path: '/cos' },
+  { linkName: <CosIcon />, path: '/cos' },
 ];
 
 const NavLink = ({ path, children }) => (
@@ -127,9 +125,18 @@ const Navbar = () => {
                     <Text ml="2">Profil</Text>
                   </MenuItem>
                   <MenuItem as={ReactLink} to="/comenzile-tale">
-                    <MdLocalShipping/>
+                    <MdLocalShipping />
                     <Text ml="2">Comenzile tale</Text>
                   </MenuItem>
+                  {userInfo.isAdmin === 'true' && (
+                    <>
+                      <MenuDivider />
+                      <MenuItem as={ReactLink} to={'/admin-panel'}>
+                        <MdOutlineAdminPanelSettings />
+                        <Text ml="2">Admin Panel</Text>
+                      </MenuItem>
+                    </>
+                  )}
                   <MenuDivider />
                   <MenuItem onClick={logoutHandler}>
                     <MdLogout />

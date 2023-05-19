@@ -3,7 +3,7 @@ import User from '../models/User.js';
 import Order from '../models/Order.js';
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
-import securitateRoute from '../Middleware/authMiddleware.js';
+import { securitateRoute, admin } from '../Middleware/authMiddleware.js';
 
 const userRoutes = express.Router();
 
@@ -89,17 +89,34 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 const getUserOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.params.id });
-  if(orders) {
-    res.json(orders)
+  if (orders) {
+    res.json(orders);
   } else {
-    res.status(404)
-    throw new Error('Nicio comanda gasita.')
+    res.status(404);
+    throw new Error('Nicio comanda gasita.');
+  }
+});
+
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findByIdAndRemove(req.params.id);
+    res.json(user);
+  } catch {
+    res.status(404);
+    throw new Error('Acest user nu exista');
   }
 });
 
 userRoutes.route('/login').post(loginUser);
 userRoutes.route('/inregistrare').post(inregistrareUser);
 userRoutes.route('/profil/:id').put(securitateRoute, updateUserProfile);
-userRoutes.route('/:id').get(securitateRoute, getUserOrders)
+userRoutes.route('/:id').get(securitateRoute, getUserOrders);
+userRoutes.route('/').get(securitateRoute, admin, getUsers);
+userRoutes.route('/:id').delete(securitateRoute, admin, deleteUser);
 
 export default userRoutes;
