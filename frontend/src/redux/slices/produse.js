@@ -6,6 +6,7 @@ export const initialState = {
     produse: [],
     produs: null,
     reviewSend: false,
+    produsUpdate: false,
 }
 
 export const produseSlice = createSlice({
@@ -37,11 +38,16 @@ export const produseSlice = createSlice({
        resetError: (state) => {
         state.error = null;
         state.reviewSend = false;
-       }
+        state.produsUpdate = false;
+       }, 
+       setProdusUpdateFlag: (state) => {
+        state.produsUpdate = true;
+        state.loading = false;
+       } 
     },
 });
 
-export const {setLoading, setError, setProduse, setProdus, produsReviewed, resetError} = produseSlice.actions;
+export const {setLoading, setError, setProduse, setProdus, produsReviewed, resetError, setProdusUpdateFlag} = produseSlice.actions;
 export default produseSlice.reducer;
 
 export const produseSelector = (state) => state.produse;

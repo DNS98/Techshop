@@ -42,6 +42,7 @@ const produsSchema = new mongoose.Schema(
     numReviews: {
       type: Number,
       required: true,
+      default: 0,
     },
     pret: {
       type: Number,

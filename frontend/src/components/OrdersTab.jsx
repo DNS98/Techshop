@@ -109,7 +109,7 @@ const OrdersTab = () => {
                       </Td>
                       <Td>
                         {order.orderItems.map((item) => (
-                          <Text>
+                          <Text key={item._id}>
                             {item.cant} x {item.nume}
                           </Text>
                         ))}
@@ -144,7 +144,7 @@ const OrdersTab = () => {
             cancelRef={cancelRef}
             itemToDelete={orderToDelete}
             deleteAction={deleteOrder}
-          ></ConfirmRemovalAlert>
+          />
         </Box>
       )}
     </Box>

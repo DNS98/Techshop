@@ -103,7 +103,7 @@ const ProdusCard = ({ produs }) => {
           <Box as="span" color={'gray.600'} fontSize="lg">
             $
           </Box>
-          {produs.pret.toFixed(2)}
+          {Number(produs.pret.toFixed(2))}
         </Box>
         <Tooltip label="Adauga cos" bg="white" placement="bottom" color="gray.800" fontSize="1em">
           <Button variant="ghost" display="flex" isDisabled={produs.stoc <= 0} onClick={() => addItem(produs._id)}>

@@ -1,5 +1,15 @@
 import axios from 'axios';
-import { getUsers, userDelete, resetError, setError, setLoading, orderDelete, setDeliveredFlag, getOrders } from '../slices/admin';
+import {
+  getUsers,
+  userDelete,
+  resetError,
+  setError,
+  setLoading,
+  orderDelete,
+  setDeliveredFlag,
+  getOrders,
+} from '../slices/admin';
+import { setProdusUpdateFlag, setProduse } from '../slices/produse';
 
 export const getAllUsers = () => async (dispatch, getState) => {
   const {
@@ -56,7 +66,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 };
 
 export const getAllOrders = () => async (dispatch, getState) => {
-  dispatch(setLoading(true))
+  dispatch(setLoading(true));
   const {
     user: { userInfo },
   } = getState();
@@ -111,7 +121,7 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
 };
 
 export const setDelivered = (id) => async (dispatch, getState) => {
-  dispatch(setLoading(true))
+  dispatch(setLoading(true));
   const {
     user: { userInfo },
   } = getState();
@@ -138,8 +148,99 @@ export const setDelivered = (id) => async (dispatch, getState) => {
   }
 };
 
-
-
 export const resetErrorAndRemoval = () => async (dispatch) => {
   dispatch(resetError());
+};
+
+//update produs
+export const updateProdus =
+  (brand, nume, categorie, stoc, pret, id, produsIsNew, descriere, image) => async (dispatch, getState) => {
+    const {
+      user: { userInfo },
+    } = getState();
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      const { data } = await axios.put(
+        `api/produse/`,
+        { brand, nume, categorie, stoc, pret, id, produsIsNew, descriere, image },
+        config
+      );
+      dispatch(setProduse(data));
+      dispatch(setProdusUpdateFlag());
+    } catch (error) {
+      dispatch(
+        setError(
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : 'Produsul nu a putut fi actualizat'
+        )
+      );
+    }
+  };
+
+//delete produs
+export const deleteProdus = (id) => async (dispatch, getState) => {
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+    const { data } = await axios.delete(`api/produse/${id}`, config);
+    dispatch(setProduse(data));
+    dispatch(setProdusUpdateFlag());
+    dispatch(resetError());
+  } catch (error) {
+    dispatch(
+      setError(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+          ? error.message
+          : 'Produsul nu a putut fi sters'
+      )
+    );
+  }
+};
+
+//upload produs
+export const uploadProdus = (newProdus) => async (dispatch, getState) => {
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+    const { data } = await axios.post(`/api/produse/`, newProdus, config);
+    dispatch(setProduse(data));
+    dispatch(setProdusUpdateFlag());
+  } catch (error) {
+    dispatch(
+      setError(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+          ? error.message
+          : 'Produsul nu a putut fi uploadat.'
+      )
+    );
+  }
 };
