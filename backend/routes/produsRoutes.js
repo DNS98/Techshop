@@ -119,11 +119,36 @@ const updateProdus = asyncHandler(async (req, res) => {
   }
 });
 
+const removeProdusReview = asyncHandler(async(req, res) => {
+  const produs = await Produs.findById(req.params.produsId)
+
+  const updatedReviews = produs.reviews.filter((rev) => rev._id.valueOf() !== req.params.reviewId)
+
+  if (produs) {
+    produs.reviews = updatedReviews;
+
+    produs.numReviews = produs.reviews.length
+
+    if(produs.numReviews > 0) {
+      produs.rating = produs.reviews.reduce((acc, item) => item.rating + acc, 0) / produs.reviews.length;
+    } else {
+      produs.rating = 1;
+    }
+
+    await produs.save(); 
+    res.status(201).json({message: "Review sters"})
+  } else {
+    res.status(404)
+    throw new Error('Produsul nu exista')
+  }
+})
+
 produsRoutes.route('/').get(getProduse);
 produsRoutes.route('/:id').get(getProdus);
 produsRoutes.route('/reviews/:id').post(securitateRoute, createProdusReview);
 produsRoutes.route('/').put(securitateRoute, admin, updateProdus);
 produsRoutes.route('/:id').delete(securitateRoute, admin, deleteProdus);
 produsRoutes.route('/').post(securitateRoute, admin, createNewProdus);
+produsRoutes.route('/:produsId/:reviewId').put(securitateRoute, admin, removeProdusReview)
 
 export default produsRoutes;

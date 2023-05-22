@@ -9,7 +9,7 @@ import {
   setDeliveredFlag,
   getOrders,
 } from '../slices/admin';
-import { setProdusUpdateFlag, setProduse } from '../slices/produse';
+import { setProdusUpdateFlag, setProduse, setReviewRemovalFlag } from '../slices/produse';
 
 export const getAllUsers = () => async (dispatch, getState) => {
   const {
@@ -240,6 +240,34 @@ export const uploadProdus = (newProdus) => async (dispatch, getState) => {
           : error.message
           ? error.message
           : 'Produsul nu a putut fi uploadat.'
+      )
+    );
+  }
+};
+
+export const removeReview = (produsId, reviewId) => async (dispatch, getState) => {
+  const {
+    user: { userInfo },
+  } = getState();
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        'Content-Type': 'application/json',
+      },
+    };
+    const { data } = await axios.put(`/api/produse/${produsId}/${reviewId}`, {}, config);
+    dispatch(setProduse(data));
+    dispatch(setReviewRemovalFlag());
+  } catch (error) {
+    dispatch(
+      setError(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+          ? error.message
+          : 'Review-ul nu a putut fi sters.'
       )
     );
   }
