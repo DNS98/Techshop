@@ -27,8 +27,7 @@ const loginUser = asyncHandler(async (req, res) => {
       createdAt: user.createdAt,
     });
   } else {
-    res.status(401);
-    throw new Error('Email sau parola gresita!');
+    res.status(401).send('Email sau parola gresita!');
   }
 });
 // Post Inregistrare User
@@ -37,8 +36,7 @@ const inregistrareUser = asyncHandler(async (req, res) => {
 
   const userExist = await User.findOne({ email });
   if (userExist) {
-    res.status(400);
-    throw new Error('Adresa de email a fost deja utilizata.');
+    res.status(400).send('Adresa de email a fost deja utilizata.');
   }
 
   const user = await User.create({
@@ -56,8 +54,7 @@ const inregistrareUser = asyncHandler(async (req, res) => {
       token: genToken(user._id),
     });
   } else {
-    res.json(400);
-    throw new Error('Date de autentificare gresite');
+    res.json(400).send('Date de autentificare gresite');
   }
 });
 

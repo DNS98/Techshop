@@ -11,7 +11,7 @@ node_modules/
 /coverage
 /frontend/src/client_id.js
 # production
-/build
+frontend/build
 
 # misc
 .DS_Store

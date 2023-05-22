@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "frontend": "npm run start --prefix frontend",
-    "server": "node backend/index.js",
-    "app": "concurrently npm \"npm run server\" \"npm run frontend\""
+    "start": "node backend/index.js",
+    "app": "concurrently npm \"npm run start\" \"npm run frontend\"",
+    "build": "cd frontend && npm install && npm run build"
   },
   "author": "Dennis Niculita",
   "license": "ISC",
