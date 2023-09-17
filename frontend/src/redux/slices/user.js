@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
     loading: false,
     error: null,
-    userInfo: JSON.parse(localStorage.getItem('userInfo')) ?? null,
+    userInfo: JSON.parse(localStorage.getItem('userInfo')) ?? null, //converteste JSON userInfo din local storage intrun obiect JS userinfo 
     updateSuccess: false,
     orders: [],
 }

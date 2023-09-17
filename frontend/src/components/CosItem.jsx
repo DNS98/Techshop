@@ -37,7 +37,7 @@ const CosItem = ({ cosItem }) => {
             </option>
           ))}
         </Select>
-        <Text fontWeight='bold'>${pret}</Text>
+        <Text fontWeight='bold'>{pret}</Text>
         <CloseButton onClick={() => dispatch(removeCosItem(id))}/>
       </Flex>
     </Flex>

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import asyncHandler  from 'express-async-handler';
 import User from '../models/User.js';
 
-
+//verifica tokenul utilizatorului la login
 const securitateRoute = asyncHandler(async(req, res, next) => {
     let token;
 
@@ -24,7 +24,7 @@ const securitateRoute = asyncHandler(async(req, res, next) => {
         throw new Error('Neautorizat, nu este token.') 
     }
 })
-
+//verificare daca utilizatorul este admin
 const admin = (req, res, next) => {
     if(req.user && req.user.isAdmin !== 'false') {
         next();

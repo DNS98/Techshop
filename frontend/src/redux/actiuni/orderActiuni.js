@@ -8,7 +8,7 @@ export const setShippingAddress = (data) => (dispatch) => {
 export const setShippingAddressError = (value) => (dispatch) => {
     dispatch(setError(value));
 }
-
+// actiunea pentru creare a comenzii
 export const createOrder = (order) => async (dispatch, getState) => {
     const {
         order: {shippingAddress},
@@ -36,7 +36,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         );   
     }
 }
-
+// resetare comanda
 export const resetOrder = () => async(dispatch) => {
     dispatch(clearOrder())
 }

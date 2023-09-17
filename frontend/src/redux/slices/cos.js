@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+//calculare subtoatal
 const calculareSubtotal = (cosState) => {
   let result = 0;
   cosState.map((item) => (result += item.cant * item.pret));
   return Number(result).toFixed(2);
 };
-
+// starea initiala a cosului
 export const initialState = {
   loading: false,
   error: null,
-  cos: JSON.parse(localStorage.getItem('cosItems')) ?? [],
+  cos: JSON.parse(localStorage.getItem('cosItems')) ?? [], //converteste JSON cosItems din local storage intrun obiect JS cos
   expressShipping: JSON.parse(localStorage.getItem('expressShipping')) ?? false,
-  subtotal: localStorage.getItem('cosItems') ? calculareSubtotal(JSON.parse(localStorage.getItem('cosItems'))) : 0,
+  subtotal: localStorage.getItem('cosItems') ? calculareSubtotal(JSON.parse(localStorage.getItem('cosItems'))) : 0, //verifica daca este ceva in cos daca da calculeaza subtotalul daca nu 0
 };
-
+// update local storage si converteste prin metoda JSON.stringify intrun format JSON
 const updateLocalStorage = (cos) => {
   localStorage.setItem('cosItems', JSON.stringify(cos));
   localStorage.setItem('subtotal', JSON.stringify(calculareSubtotal(cos)));
@@ -26,12 +27,14 @@ export const cosSlice = createSlice({
     setLoading: (state) => {
       state.loading = true;
     },
+    // metoda pentru a adauga in cos
     cosItemAdd: (state, { payload }) => {
       const itemExist = state.cos.find((item) => item.id === payload.id);
 
       if (itemExist) {
         state.cos = state.cos.map((item) => (item.id === itemExist.id ? payload : item));
       } else {
+        //payload este adăugat în cos folosind operatorul spread fara a modifica starea initiala
         state.cos = [...state.cos, payload];
       }
       state.loading = false;

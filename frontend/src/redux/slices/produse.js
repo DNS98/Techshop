@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+//starea initiala
 export const initialState = {
   loading: false,
   error: null,

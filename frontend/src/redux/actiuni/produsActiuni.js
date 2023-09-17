@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { setProduse, setLoading, setError, setProdus, produsReviewed, resetError } from '../slices/produse';
-
+//actiunea de afisare a produselor
 export const getProduse = () => async (dispatch) => {
   dispatch(setLoading(true));
   try {
@@ -19,7 +19,7 @@ export const getProduse = () => async (dispatch) => {
     );
   }
 };
-
+//actiunea de afsare a produsului
 export const getProdus = (id) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
@@ -37,7 +37,7 @@ export const getProdus = (id) => async (dispatch) => {
     );
   }
 };
-
+// actiunea de creare a reviewului
 export const createProdusReview = (produsId, userId, comentariu, rating, titlu) => async (dispatch, getState) => {
   dispatch(setLoading(true));
   const {
@@ -70,7 +70,7 @@ export const createProdusReview = (produsId, userId, comentariu, rating, titlu) 
     );
   }
 };
-
+// actiunea de resetare eroare
 export const resetProdusError = () => async (dispatch) => {
   dispatch(resetError());
 };

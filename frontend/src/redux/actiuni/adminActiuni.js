@@ -11,6 +11,7 @@ import {
 } from '../slices/admin';
 import { setProdusUpdateFlag, setProduse, setReviewRemovalFlag } from '../slices/produse';
 
+//actiunea de afisare a utilizatorilor
 export const getAllUsers = () => async (dispatch, getState) => {
   const {
     user: { userInfo },
@@ -37,7 +38,7 @@ export const getAllUsers = () => async (dispatch, getState) => {
     );
   }
 };
-
+// actiunea de stergere a utilizatorului
 export const deleteUser = (id) => async (dispatch, getState) => {
   const {
     user: { userInfo },
@@ -64,7 +65,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     );
   }
 };
-
+//actiunea de afisare a comenzilor 
 export const getAllOrders = () => async (dispatch, getState) => {
   dispatch(setLoading(true));
   const {
@@ -92,7 +93,7 @@ export const getAllOrders = () => async (dispatch, getState) => {
     );
   }
 };
-
+//actiunea de stergere a comenzii
 export const deleteOrder = (id) => async (dispatch, getState) => {
   const {
     user: { userInfo },
@@ -119,7 +120,7 @@ export const deleteOrder = (id) => async (dispatch, getState) => {
     );
   }
 };
-
+// actiunea pentru a seta comanda ca fiind livrata
 export const setDelivered = (id) => async (dispatch, getState) => {
   dispatch(setLoading(true));
   const {
@@ -152,7 +153,7 @@ export const resetErrorAndRemoval = () => async (dispatch) => {
   dispatch(resetError());
 };
 
-//update produs
+//actiunea update produs
 export const updateProdus =
   (brand, nume, categorie, stoc, pret, id, produsIsNew, descriere, image) => async (dispatch, getState) => {
     const {
@@ -244,7 +245,7 @@ export const uploadProdus = (newProdus) => async (dispatch, getState) => {
     );
   }
 };
-
+//actiunea de stergere a unui review
 export const removeReview = (produsId, reviewId) => async (dispatch, getState) => {
   const {
     user: { userInfo },

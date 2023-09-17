@@ -118,7 +118,7 @@ const ProdusScreen = () => {
                 </Heading>
                 <Stack spacing="5">
                   <Box>
-                    <Text fontSize="xl">${produs.pret}</Text>
+                    <Text fontSize="xl">€{produs.pret}</Text>
                     <Flex>
                       <HStack spacing={'2px'}>
                         <StarIcon color="orange.500" />
@@ -150,7 +150,7 @@ const ProdusScreen = () => {
                     <Flex alignItems="center">
                       <BiPackage size="20px" />
                       <Text fontWeight="medium" fontSize="sm" ml="2">
-                        Livrare gratuita pentru comenzile peste $1000
+                        Livrare gratuita pentru comenzile peste €1000
                       </Text>
                     </Flex>
 

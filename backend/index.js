@@ -4,7 +4,7 @@ import connectToDatabase from './database.js';
 import express from 'express';
 import path from 'path';
 
-//Rute
+//Rutele aplicatiei
 import produsRoutes from './routes/produsRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
@@ -13,11 +13,12 @@ dotenv.config();
 connectToDatabase();
 const app = express();
 
+/*utilizarea rutelor*/
 app.use(express.json());
 app.use('/api/produse', produsRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
-
+//ruta paypal
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID));
 
 const port = process.env.PORT || 5000;

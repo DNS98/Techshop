@@ -7,9 +7,9 @@ import { securitateRoute, admin } from '../Middleware/authMiddleware.js';
 
 const userRoutes = express.Router();
 
-// expiersIn trebuie modificat dupa terminarea proiectului.
+// expiraIn 80d.
 const genToken = (id) => {
-  return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: '60d' });
+  return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: '80d' });
 };
 
 //Post Login User
@@ -57,7 +57,7 @@ const inregistrareUser = asyncHandler(async (req, res) => {
     res.json(400).send('Date de autentificare gresite');
   }
 });
-
+//PUT modificare profil
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
@@ -83,7 +83,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error('User-ul nu exista.');
   }
 });
-
+// GET comenzi utilizatori
 const getUserOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.params.id });
   if (orders) {
@@ -93,12 +93,13 @@ const getUserOrders = asyncHandler(async (req, res) => {
     throw new Error('Nicio comanda gasita.');
   }
 });
-
+//rute pentru admin
+//GET utilizatori
 const getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
   res.json(users);
 });
-
+//DELETE utilizatori
 const deleteUser = asyncHandler(async (req, res) => {
   try {
     const user = await User.findByIdAndRemove(req.params.id);

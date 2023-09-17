@@ -39,10 +39,10 @@ const CheckoutItem = ({ cosItem }) => {
           </Select>
         </Flex>
         <Box>
-            <Text fontWeight='bold'>${pret}</Text>
+          <Text fontWeight="bold">€{pret}</Text>
         </Box>
       </Flex>
-      <Divider bg={mode('gray.400', 'gray.800')}/>
+      <Divider bg={mode('gray.400', 'gray.800')} />
     </>
   );
 };

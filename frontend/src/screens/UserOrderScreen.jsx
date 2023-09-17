@@ -68,13 +68,13 @@ const UserOrderScreen = () => {
                     <Td>{order._id}</Td>
                     <Td>{new Date(order.createdAt).toDateString()}</Td>
                     <Td>
-                      ${order.totalPrice} prin {order.paymentMethod}
+                      €{order.totalPrice} prin {order.paymentMethod}
                     </Td>
                     <Td>
                       {order.orderItems.map((item) => (
                         <UnorderedList key={item._id}>
                           <ListItem>
-                            {item.cant} x {item.nume} (${item.pret})
+                            {item.cant} x {item.nume} (€{item.pret})
                           </ListItem>
                         </UnorderedList>
                       ))}

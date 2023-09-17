@@ -5,7 +5,7 @@ import {securitateRoute, admin} from '../Middleware/authMiddleware.js';
 
 
 const orderRoutes = express.Router();
-
+// POST creare comanda
 const createOrder = asyncHandler(async (req, res) => {
     const {orderItems, shippingAddress, paymentMethod, shippingPrice, paymentDetails, totalPrice, userInfo} = req.body;
 
@@ -28,12 +28,12 @@ const createOrder = asyncHandler(async (req, res) => {
         res.status(201).json(createdOrder)
     }
 })
-
+// GET afisare comenzi
 const getOrders = async(req, res) => {
     const orders = await Order.find({})
     res.json(orders)
 };
-
+//DELETE sterge comenzi
 const deleteOrder = asyncHandler(async(req, res) => {
     const order = await Order.findByIdAndDelete(req.params.id)
 
@@ -44,7 +44,7 @@ const deleteOrder = asyncHandler(async(req, res) => {
         throw new Error('Comanda nu a fost gasita')
     }
 })
-
+//PUT livrare comanda
 const setDelivered = asyncHandler(async(req, res) => {
     const order = await Order.findById(req.params.id)
 

@@ -115,8 +115,8 @@ const OrdersTab = () => {
                         ))}
                       </Td>
                       <Td>{order.paymentMethod}</Td>
-                      <Td>${order.shippingPrice}</Td>
-                      <Td>${order.totalPrice}</Td>
+                      <Td>€{order.shippingPrice}</Td>
+                      <Td>€{order.totalPrice}</Td>
                       <Td>{order.isDelivered ? <CheckCircleIcon color={'green.300'}/> : 'in curs de livrare'}</Td>
                       <Td>
                         <Flex direction='column'>

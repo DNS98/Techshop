@@ -5,12 +5,12 @@ import User from '../models/User.js';
 import { securitateRoute, admin } from '../Middleware/authMiddleware.js';
 
 const produsRoutes = express.Router();
-
+//GET produse
 const getProduse = async (req, res) => {
   const produse = await Produs.find({});
   res.json(produse);
 };
-
+//GET Produs
 const getProdus = async (req, res) => {
   const produs = await Produs.findById(req.params.id);
 
@@ -21,7 +21,7 @@ const getProdus = async (req, res) => {
     throw new Error('Produsul nu a fost gasit');
   }
 };
-
+//POST Creare review 
 const createProdusReview = asyncHandler(async (req, res) => {
   const { rating, comentariu, userId, titlu } = req.body;
 
@@ -58,7 +58,7 @@ const createProdusReview = asyncHandler(async (req, res) => {
   }
 });
 
-//creare produs
+// POST creare produs
 const createNewProdus = asyncHandler(async (req, res) => {
   const { brand, nume, categorie, stoc, pret, image, produsIsNew, descriere } = req.body;
   const newProdus = await Produs.create({
@@ -83,7 +83,7 @@ const createNewProdus = asyncHandler(async (req, res) => {
   }
 });
 
-//sterge produs
+//DELETE sterge produs
 const deleteProdus = asyncHandler(async (req, res) => {
   const produs = await Produs.findByIdAndDelete(req.params.id);
 
@@ -95,7 +95,7 @@ const deleteProdus = asyncHandler(async (req, res) => {
   }
 });
 
-//actualizare produs
+//PUT actualizare produs
 const updateProdus = asyncHandler(async (req, res) => {
   const { brand, nume, image, categorie, stoc, pret, id, produsIsNew, descriere } = req.body;
 
@@ -118,7 +118,7 @@ const updateProdus = asyncHandler(async (req, res) => {
     throw new Error('Produsul nu exista');
   }
 });
-
+//PUT sterge user review
 const removeProdusReview = asyncHandler(async(req, res) => {
   const produs = await Produs.findById(req.params.produsId)
 

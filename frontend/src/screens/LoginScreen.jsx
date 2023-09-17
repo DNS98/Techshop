@@ -24,7 +24,6 @@ import TextField from '../components/TextField';
 import { login } from '../redux/actiuni/userActiuni'
 
 
-// lungime parola
 const LoginScreen = () => {
 const navigate = useNavigate()
 const locatie = useLocation()
@@ -55,7 +54,7 @@ const {loading, error, userInfo} = user
       validationSchema={Yup.object({
         email: Yup.string().email('Email gresit').required('Necesita adresa de email.'),
         password: Yup.string()
-          .min(1, 'Parola este prea scurta - trebuie sa contina cel putin 6 caractere')
+          .min(1, 'Parola este prea scurta - trebuie sa contina cel putin 2 caractere')
           .required('Parola este obligatorie'),
       })}
       onSubmit={(values) => {

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { setLoading, setError, userLogin, userLogout, updateUserProfil, resetUpdate, setUserOrders } from '../slices/user';
 
-
+//actiunea login
 export const login = (email, password) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
@@ -28,13 +28,13 @@ export const login = (email, password) => async (dispatch) => {
      }
 };
 
-
+//actiunea logout
 export const logout = () => (dispatch) => {
     
     localStorage.removeItem('userInfo');
     dispatch(userLogout());
 }
-
+//actiune inregistrare
 export const inregistrare = (nume, email, password) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
@@ -60,7 +60,7 @@ export const inregistrare = (nume, email, password) => async (dispatch) => {
         );
      }
 }
-
+//actiunea de actializare profil
 export const updateProfil = (id, nume, email, password) => async (dispatch, getState) => {
     const {
         user: {userInfo}, 
@@ -92,7 +92,7 @@ export const updateProfil = (id, nume, email, password) => async (dispatch, getS
 export const resetUpdateSuccess = () => async(dispatch) => {
     dispatch(resetUpdate());
 }
-
+// actiunea pentru afisare a comenzilor uilizatorului
 export const getUserOrders = () => async(dispatch, getState) => {
     dispatch(setLoading(true))
     const {

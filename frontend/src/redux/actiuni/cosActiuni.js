@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setLoading, setError, cosItemAdd, cosItemRemoval, setExpressShipping, clearCos } from '../slices/cos';
 
+// Actiunea de adaugare in cos
 export const addCosItem = (id, cant) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
@@ -26,16 +27,17 @@ export const addCosItem = (id, cant) => async (dispatch) => {
     );
   }
 };
-
+// actiunea de a sterge produsu din cos
 export const removeCosItem = (id) => async (dispatch) => {
   dispatch(setLoading(true));
   dispatch(cosItemRemoval(id));
 };
 
+// actiune de a seta livrare express
 export const setExpress = (value) => async (dispatch) => {
   dispatch(setExpressShipping(value));
 };
-
+// resetare cos
 export const resetCos = () => (dispatch) => {
   dispatch(clearCos());
 };

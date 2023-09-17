@@ -25,6 +25,7 @@ const CheckoutOrderSummary = () => {
   const { onClose: onErrorClose, onOpen: onErrorOpen, isOpen: isErrorOpen } = useDisclosure();
   const { onClose: onSuccessClose, onOpen: onSuccessOpen, isOpen: isSuccessOpen } = useDisclosure();
   const colorMode = mode('gray.600', 'gray.400');
+  //redux
   const cosItems = useSelector((state) => state.cos);
   const { cos, subtotal, expressShipping } = cosItems;
 
@@ -33,14 +34,15 @@ const CheckoutOrderSummary = () => {
 
   const shippingInfo = useSelector((state) => state.order);
   const { error, shippingAddress } = shippingInfo;
+
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const dispatch = useDispatch();
-
+//calculare livrare
   const shipping = useCallback(
     () => (expressShipping === 'true' ? 15.99 : subtotal <= 1000 ? 4.99 : 0),
     [expressShipping, subtotal]
   );
-
+//calculare total
   const total = useCallback(
     () => Number(shipping() === 0 ? Number(subtotal) : Number(subtotal) + shipping()).toFixed(2),
     [shipping, subtotal]
@@ -110,7 +112,7 @@ const CheckoutOrderSummary = () => {
             Total
           </Text>
           <Text fontSize="xl" fontWeight="extrabold">
-            ${Number(total())}
+          €{Number(total())}
           </Text>
         </Flex>
       </Stack>

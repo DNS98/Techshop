@@ -21,10 +21,10 @@ const CosOrderSumar = () => {
       <Heading size="md">Sumar Comanda</Heading>
       <Stack spacing="6">
         <Flex justify="space-between">
-          <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
+          <Text fontWeight="medium" color={mode('gray.600', 'gray.400') } fontSize='14px'>
             Subtotal
           </Text>
-          <Text fontWeight="medium"> ${subtotal} </Text>
+          <Text fontWeight="medium" fontSize='14px'> €{subtotal}  </Text>
         </Flex>
         <Flex justify="space-between">
           <Text fontWeight="medium" color={mode('gray.600', 'gray.400')}>
@@ -41,11 +41,11 @@ const CosOrderSumar = () => {
           </Text>
         </Flex>
         <Flex justify="space-between">
-          <Text fontSize="xl" fontWeight="extrabold">
+          <Text fontSize="md" fontWeight="extrabold">
             Total
           </Text>
-          <Text fontSize="xl" fontWeight="extrabold">
-           ${subtotal <= 1000 ? Number(subtotal) + Number(standardshipping) : subtotal}
+          <Text fontSize="md" fontWeight="extrabold">
+          €{subtotal <= 1000 ? Number(subtotal) + Number(standardshipping) : subtotal}
           </Text>
           
         </Flex>

@@ -73,7 +73,7 @@ const ShippingInfo = () => {
                   <Stack spacing="6">Express</Stack>
                 </Stack>
                 <Radio value="false">
-                  <Tooltip label="Livrare gratis pentru comenzile peste 1000$">
+                  <Tooltip label="Livrare gratis pentru comenzile peste 1000 Ron">
                     <Box>
                       <Text fontWeight="bold">Standard 4.99</Text>
                       <Text>Livrat in 2-5 zile</Text>

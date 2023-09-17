@@ -100,8 +100,8 @@ const ProdusCard = ({ produs }) => {
       </Flex>
       <Flex justify="space-between">
         <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-          <Box as="span" color={'gray.600'} fontSize="lg">
-            $
+          <Box as="span" color={'gray.600'} fontSize="xl" ml='5px'>
+            €
           </Box>
           {Number(produs.pret.toFixed(2))}
         </Box>
